@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Deposit service</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h3>Deposit money</h3>
+        <form action="rest/bankAccountService/deposit" method="post">  
+            Enter id of the account to deposit money to: <input type="number" name="accountId"/><br/><br/>
+            Enter the amount of money to deposit: <input type="number" name="amount"/><br/><br/>
+            <input type="submit" value="Deposit amount"/>
+        </form>
+    </body>
+</html>

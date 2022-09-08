@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Withdraw service</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h3>Withdraw money</h3>
+        <form action="rest/bankAccountService/withdraw" method="post">  
+            Enter id of the account to withdraw money from: <input type="number" name="accountId"/><br/><br/>
+            Enter the amount of money to withdraw: <input type="number" name="amount"/><br/><br/>
+            <input type="submit" value="Withdraw amount"/>
+        </form>
+    </body>
+</html>

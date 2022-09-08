@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bank database</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div><a href="addBankAccount.html">Add a bank account</a></div>
+        <div><a href="withdrawal.html">Withdraw money</a></div>
+        <div><a href="deposit.html">Deposit money</a></div>
+        <div><a href="transfer.html">Transfer money</a></div>
+        <div><a href="activate_deactivate.html">Activate/deactivate account</a></div>
+        <div><a href="rest/bankAccountService/allaccountsxml">Show all accounts (xml)</a></div>
+        <div><a href="rest/bankAccountService/allaccountsjson">Show all accounts (json)</a></div>
+        <div><a href="delete.html">Delete an account</a></div><br/>
+
+        To show the information of a single bank account in an XML file enter the following url in your browser:<br/>
+        http://localhost:8082/Netprog_Project/rest/bankAccountService/bankaccountxml/{accountId}*<br/><br/>
+        To show the information of a single bank account in an JSON file enter the following url in your browser:<br/>
+        http://localhost:8082/Netprog_Project/rest/bankAccountService/bankaccountjson/{accountId}*<br><br/>
+        * In place of accountId enter the number of the account you want to see information on.<br/>
+    </body>
+</html>

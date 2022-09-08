@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Transfer service</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h3>Transfer money</h3>
+        <form action="rest/bankAccountService/transfer" method="post">  
+            Enter id of the account that will send the money: <input type="number" name="accountIdSend"/><br/><br/>
+            Enter id of the account that will receive the money: <input type="number" name="accountIdReceive"/><br/><br/>
+            Enter the amount of money to transfer: <input type="number" name="amount"/><br/><br/>
+            <input type="submit" value="Transfer amount"/>
+        </form>
+    </body>
+</html>

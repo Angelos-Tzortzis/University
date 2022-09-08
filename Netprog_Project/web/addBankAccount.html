@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add bank account service</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h3>Add a bank account</h3>
+        <form action="rest/bankAccountService/bankAccounts" method="post">
+            Enter first name: <input type="text" name="firstName"/><br/><br/>
+            Enter last name: <input type="text" name="lastName"/><br/><br/>
+            Enter phone number: <input type="text" name="phoneNumber"/><br/><br/>
+            Enter email: <input type="text" name="email"/><br/><br/>
+            Enter account balance: <input type="number" name="accountBalance"/><br/><br/>
+            <input type="submit" value="Add bank account"/>
+        </form>
+    </body>
+</html>
