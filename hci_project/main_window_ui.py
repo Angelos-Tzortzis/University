@@ -39,7 +39,9 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.enterButton.setFont(font)
         self.enterButton.setStyleSheet("color: white;\n"
-"background-color:rgb(85, 85, 255)")
+"background-color:rgb(85, 85, 255);\n"
+"border-radius: 10;\n"
+"")
         self.enterButton.setObjectName("enterButton")
         MainWindow.setCentralWidget(self.centralwidget)
 
