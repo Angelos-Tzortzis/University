@@ -39,9 +39,9 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.enterButton.setFont(font)
         self.enterButton.setStyleSheet("color: white;\n"
-"background-color:rgb(85, 85, 255);\n"
-"border-radius: 10;\n"
-"")
+"                        background-color:rgb(85, 85, 255);\n"
+"                        border-radius: 10;\n"
+"                    ")
         self.enterButton.setObjectName("enterButton")
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -51,5 +51,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.Title.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" color:#ffffff;\">Virtual Assistant</span></p></body></html>"))
+        self.Title.setText(_translate("MainWindow", "<html><head/><body><p><span style=\"\n"
+"                        color:#ffffff;\">Virtual\n"
+"                        Assistant</span></p></body></html>"))
         self.enterButton.setText(_translate("MainWindow", "Enter"))
