@@ -1,0 +1,184 @@
+Εργαστήριο Λειτουργικά Συστήματα ΙΙ / Άσκηση 1 / 2022-2023.
+Ονοματεπώνυμο: Άγγελος Τζώρτζης.
+Α.Μ.: ice18390094.
+
+
+1.
+Με τις εντολές της εκφώνησης παράχθηκαν 6 νέες διεργασίες:
+p1, p2, p3, p4, p5, p6 και έχουμε και την αρχική p0.
+
+Η αρχική διεργασία είναι η p0. Η p1, p2 και p3 είναι τα "παιδιά της". Η p4
+είναι "παιδί" της p1 άρα "εγγόνι" της p0. H p5 είναι "παιδί" της p2 αρα είναι
+και αυτή "εγγόνι" της p0. Tέλος Η p6 είναι "παιδί" της p4 άρα "εγγόνι" της
+p1 και "δισέγγονο" της p0.
+
+Με την εντολή "pid1=fork()" δημιουργήθηκε η διεργασία p1. Μετά εφόσον έχουμε
+την εντολή "if (pid1!=0)" το επόμενο μπλόκ εντολών εκτελείται μόνο στην p0.
+Mε την εντολή "pid2=fork()" δημιοργήθηκε η διεργασία p2. H αμέσως επόμενη
+εντολή είναι "pid3=fork()" και εφόσον δέν προσδιορίζεται σε ποιά διεργασία
+εκτελείται, την εκτελούν και η p0 και η p2 και δημιουργούν τις διεργασίες
+p5 και p3 αντίστοιχα. Με το else πάμε στο μπλόκ κώδικα που εκτελείται από την
+διεργασία p1. Με την "pid4=fork()" δημιοργήθηκε η p4. Mε την "if (pid4==0)"
+ξέρουμε ότι το επόμενο μπλόκ κώδικα εκτελείται στην p4. Tέλος με την εντολή
+"pid5=fork()" δημιοργήθηκε η p6.
+
+Σχήμα των διεργασιών:
+    p0
+   /|\
+  / | \
+ /  |  \
+ p1 p2 p3
+ |  |
+ p4 p5
+ |
+ p6
+
+
+2.
+Αρχεία για την υλοποίηση της άσκησης:
+project1.c, project1_extension.c (για την επέκταση της άσκησης).
+
+Υπάρχει ενδεχόμενο η p1 να γίνει zombie εάν τερματίσει πρίν την p0 αλλα δεν
+γίνει δεκτό το αίτημα τερματισμού της και παραμένει zombie μέσα στην μνήμη, και
+αυτό συμβαίνει καθώς η p0 δεν αναμένει σήμα τερματισμού από την p1.
+Εάν όμως τερματίσει η p0 πρίν την p1 τότε η p1 θα γίνει orphan. Επίσης πιθανά
+zombie είναι η p5 και η p6 καθώς η p2 αναμένει τον τερματισμό μόνο μίας
+οποιασδήποτε διεργασίας η άλλη πιθανόν να γίνει zombie ή orphan. Στην περίπτωση
+πού η p2 έχει πάνω απο 2 διεργασίες τότε όλες πλήν μίας κινδυνέουν να γίνουν
+zombie ή orphan, αναλόγως εάν η p2 δεχτεί το αίτημα τερματισμού τους ή
+τερματίσει πρίν από αυτές.
+
+
+Ενδεικτικά τρεξίματα:
+project1.c:
+1.
+p0: pid = 2903, ppid = 2895
+p1: pid = 2904, ppid = 2903
+p2: pid = 2905, ppid = 2903
+p5: pid = 2906, ppid = 2905
+p4: pid = 2909, ppid = 2904
+process with pid: 2906 terminated.
+p6: pid = 2907, ppid = 2905
+p3: pid = 2908, ppid = 2904
+hello from your child
+p4 terminated with code 0.
+Signal 17 (CHLD) caught by ps (3.3.12).
+ps:ps/display.c:66: please report this bug
+  PID TTY          TIME CMD
+ 2885 pts/0    00:00:00 bash
+ 2895 pts/0    00:00:00 make
+ 2903 pts/0    00:00:00 ps
+ 2904 pts/0    00:00:00 project1 <defunct>
+
+2.
+p0: pid = 2940, ppid = 2932
+p2: pid = 2942, ppid = 2940
+p6: pid = 2944, ppid = 2942
+process with pid: 2944 terminated.
+p5: pid = 2943, ppid = 1
+p1: pid = 2941, ppid = 2940
+p4: pid = 2946, ppid = 2941
+p3: pid = 2945, ppid = 2941
+hello from your child
+p4 terminated with code 0.
+  PID TTY          TIME CMD
+ 2885 pts/0    00:00:00 bash
+ 2932 pts/0    00:00:00 make
+ 2940 pts/0    00:00:00 ps
+ 2941 pts/0    00:00:00 project1 <defunct>
+
+3.
+p0: pid = 4199, ppid = 4192
+p2: pid = 4201, ppid = 4199
+p5: pid = 4202, ppid = 4201
+process with pid: 4202 terminated.
+p6: pid = 4203, ppid = 1
+p1: pid = 4200, ppid = 4199
+p4: pid = 4205, ppid = 4200
+p3: pid = 4204, ppid = 4200
+hello from your child
+p4 terminated with code 0.
+  PID TTY          TIME CMD
+ 2885 pts/0    00:00:00 bash
+ 4192 pts/0    00:00:00 make
+ 4199 pts/0    00:00:00 ps
+ 4200 pts/0    00:00:00 project1 <defunct>
+
+
+
+project1_extension.c:
+1.
+Enter the number of children for p2 to create: 4
+p0: pid = 4228, ppid = 4221
+p1: pid = 4237, ppid = 4228
+p2: pid = 4238, ppid = 4228
+p4: pid = 4240, ppid = 4237
+p2: child[3]: pid = 4243, ppid = 4238
+process with pid: 4243 terminated.
+p3: pid = 4239, ppid = 4237
+hello from your child
+p4 terminated with code 0.
+p2: child[4]: pid = 4244, ppid = 4238
+p2: child[1]: pid = 4241, ppid = 4238
+p2: child[2]: pid = 4242, ppid = 1
+  PID TTY          TIME CMD
+ 2885 pts/0    00:00:00 bash
+ 4221 pts/0    00:00:00 make
+ 4228 pts/0    00:00:00 ps
+ 4237 pts/0    00:00:00 project1 <defunct>
+
+2.
+Enter the number of children for p2 to create: 8
+p0: pid = 4253, ppid = 4245
+p1: pid = 4263, ppid = 4253
+p4: pid = 4266, ppid = 4263
+p2: pid = 4264, ppid = 4253
+p3: pid = 4265, ppid = 4263
+hello from your child
+p4 terminated with code 0.
+p2: child[3]: pid = 4269, ppid = 4264
+p2: child[4]: pid = 4270, ppid = 4264
+process with pid: 4269 terminated.
+p2: child[5]: pid = 4271, ppid = 1
+p2: child[2]: pid = 4268, ppid = 1
+p2: child[1]: pid = 4267, ppid = 1
+p2: child[7]: pid = 4273, ppid = 1
+p2: child[8]: pid = 4274, ppid = 1
+p2: child[6]: pid = 4272, ppid = 4264
+  PID TTY          TIME CMD
+ 2885 pts/0    00:00:00 bash
+ 4245 pts/0    00:00:00 make
+ 4253 pts/0    00:00:00 ps
+ 4263 pts/0    00:00:00 project1 <defunct>
+
+3.
+Enter the number of children for p2 to create: 16
+p0: pid = 4324, ppid = 4317
+p1: pid = 4333, ppid = 4324
+p3: pid = 4335, ppid = 4333
+p2: pid = 4334, ppid = 4324
+hello from your child
+p2: child[2]: pid = 4338, ppid = 4334
+p2: child[3]: pid = 4339, ppid = 4334
+p2: child[4]: pid = 4340, ppid = 4334
+p2: child[9]: pid = 4345, ppid = 4334
+p2: child[10]: pid = 4346, ppid = 4334
+process with pid: 4338 terminated.
+p2: child[7]: pid = 4343, ppid = 4334
+p2: child[15]: pid = 4351, ppid = 1
+p2: child[14]: pid = 4350, ppid = 1
+p2: child[8]: pid = 4344, ppid = 1
+p2: child[6]: pid = 4342, ppid = 1
+p4: pid = 4336, ppid = 4333
+p4 terminated with code 0.
+p2: child[5]: pid = 4341, ppid = 1
+p2: child[1]: pid = 4337, ppid = 1
+p2: child[12]: pid = 4348, ppid = 1
+p2: child[11]: pid = 4347, ppid = 1
+p2: child[16]: pid = 4352, ppid = 1
+p2: child[13]: pid = 4349, ppid = 1
+  PID TTY          TIME CMD
+ 2885 pts/0    00:00:00 bash
+ 4317 pts/0    00:00:00 make
+ 4324 pts/0    00:00:00 ps
+ 4333 pts/0    00:00:00 project1 <defunct>
